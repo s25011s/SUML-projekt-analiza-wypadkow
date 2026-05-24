@@ -1,0 +1,71 @@
+crash_raw:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/crash_data.csv
+
+crash_encoders:
+  type: pickle.PickleDataset
+  filepath: data/06_models/encoders.pkl
+
+crash_cleaned:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/crash_cleaned.parquet
+
+crash_features:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/crash_features.parquet
+
+model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/model.pkl
+
+metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/metrics.json
+
+automl_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/automl_model.pkl
+
+automl_metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/automl_metrics.json
+
+best_comparison_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/best_comparison_model.pkl
+
+comparison_metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/comparison_metrics.json
+
+tuned_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/tuned_model.pkl
+
+tuning_metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/tuning_metrics.json
+
+grid_random_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/grid_random_model.pkl
+
+grid_random_metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/grid_random_metrics.json
+
+selected_features:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/selected_features.parquet
+
+feature_selection_metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/feature_selection_metrics.json
+
+autogluon_predictor:
+  type: pickle.PickleDataset
+  filepath: data/06_models/autogluon_predictor.pkl
+
+autogluon_metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/autogluon_metrics.json

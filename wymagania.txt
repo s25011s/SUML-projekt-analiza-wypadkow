@@ -1,0 +1,47 @@
+Polsko-Japońska Akademia Technik Komputerowych 
+Środowiska uruchomieniowe Machine Learning (SUML)
+Projekt zaliczeniowy - wymagania
+terminy prezentacji: 13.06.2026, 27.06.2026
+Celem projektu jest stworzenie aplikacji wykorzystującej silnik Machine Learning, która:
+- jest łatwa do przeniesienia między różnymi środowiskami (proszę o wykorzystanie kontroli wersji GitHub),
+- łatwo ją odtworzyć w różnych środowiskach,
+- jest napisana z rozdzieleniem logiki działania (data | model | app) 
+● przygotowywania danych (data), 
+● trenowania i uruchamiania modelu (model), 
+● serwowania aplikacji (app),
+- modularność zapewniona jest zarówno na poziomie funkcji jak i struktury katalogów oraz plików,
+- dobrze udokumentowana zarówno w pliku README.md zawierającego wymagania oraz metodę uruchomienia, jak 
+też w postaci prawidłowego stosowania komentarzy w kodzie,
+- napisana jest czystym kodem (uporządkowanym bez zbędnych redundancji, nazwy zmiennych oparte o język 
+naturalny, tak aby przy czytaniu kodu łatwo można było się zorientować o czym jest) – spełnia wymogi PEP8,
+- aplikacja powinna uzyskać co najmniej 8 pkt. w pylint (https://pypi.org/project/pylint/).
+Aplikacja może mieć formę strony internetowej, jako usługa API lub aplikacji mobilnej. 
+Projekty będą realizowane w grupach i stanowią podstawę zaliczenia ćwiczeń, a także całego przedmiotu (zamiast 
+egzaminu). Za przygotowane rozwiązanie będzie można uzyskać punkty:
+- 25% - jakość kodu;
+- 20% - modularność;
+- 20% - przenoszalność;
+- 20% - jakość dokumentacji;
+- 5% - jakość modelu ML;
+- 10% - terminowość i dobra organizacja pracy (systematyka dostarczania na czas etapów prac).
+Zaliczenie uzyskuje się przy osiągnięciu 75%
+75% - 80% → 3
+81% - 85% → 3.5
+86% - 90% → 4
+91% - 95% → 4.5
+96% - 100% → 5
+Forma przekazania projektu:
+● Projekt zostanie zaprezentowany na ostatnich zajęciach przez każdą grupę (max 10’ opowiedzenie projektu, 
+5’ dodatkowych komentarzy i wyjaśnień)
+● Repozytorium GitHub z pełną dokumentacją oraz plikami umożliwiającymi uruchomienie aplikacji. 
+● W tym:
+○ Plik README.md zawierający jasny opis czego dotyczy aplikacja, w jaki sposób ją uruchomić i jeżeli są 
+wymagane, inne niezbędne informacje (np. format danych wejściowych, sposób wywołania wyniku, 
+jeżeli nie jest oczywisty etc.).
+○ Plik z wymaganiami uruchomienia np. requirements.yaml lub requirements.txt oraz plik 
+konfiguracyjny autoML (jeżeli zachodzi taka potrzeba) w zależności od przyjętej metody 
+przenoszenia środowiska.
+Aplikacja powinna uruchamiać bez konieczności dokonywania konfiguracji w systemie operacyjnym. 
+Doinstalowywanie niezbędnych pakietów powinno odbywać się przy uruchomieniu automatycznie (chyba, że sytuacja 
+jest wyjątkowa i nie ma innej możliwości, wtedy dopuszczalne jest wymaganie doinstalowania jakiegoś pakietu lub 
+aplikacji ręcznie).

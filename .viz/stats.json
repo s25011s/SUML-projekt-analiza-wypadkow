@@ -1,0 +1,1 @@
+{"crash_raw": {"rows": 172105, "columns": 43, "file_size": 86339900}, "columns_dropped": {"rows": 172105, "columns": 33}, "cleaned": {"rows": 172105, "columns": 33}, "engineered": {"rows": 172105, "columns": 40}, "target_mapped": {"rows": 172105, "columns": 40}, "crash_features": {"rows": 172105, "columns": 40, "file_size": 5449322}}

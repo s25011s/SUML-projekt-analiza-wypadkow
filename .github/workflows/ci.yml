@@ -1,0 +1,32 @@
+name: CI Pipeline
+
+on:
+  push:
+  pull_request:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Instalacja zaleznosci
+        run: |
+          pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Testy (pytest)
+        run: pytest -q
+
+      - name: Lint (ruff)
+        run: ruff check src tests
+
+      - name: Pylint
+        run: pylint src/crash_kedro/api/app.py src/crash_kedro/utils/encoders.py src/crash_kedro/__main__.py
