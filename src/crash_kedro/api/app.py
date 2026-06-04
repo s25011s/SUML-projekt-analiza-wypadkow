@@ -69,10 +69,10 @@ TRAINING_FEATURE_ORDER = [
 
 MODEL_CANDIDATES = [
     Path(os.getenv("MODEL_PATH", "")) if os.getenv("MODEL_PATH") else None,
-    PROJECT_ROOT / "data" / "06_models" / "model.pkl",
     PROJECT_ROOT / "data" / "06_models" / "tuned_model.pkl",
     PROJECT_ROOT / "data" / "06_models" / "best_comparison_model.pkl",
     PROJECT_ROOT / "data" / "06_models" / "grid_random_model.pkl",
+    PROJECT_ROOT / "data" / "06_models" / "model.pkl",
 ]
 
 _MODEL_CACHE: dict[str, Any | None] = {"path": None, "obj": None}
@@ -303,8 +303,15 @@ def predict_crash_severity(input_data: CrashInput) -> PredictionOutput:
         return output
 
     try:
-        prediction = model.predict(features)[0]
         probabilities = _extract_probabilities(model, features)
+        serious_prob = probabilities.get("SERIOUS", 0.0)
+        minor_prob = probabilities.get("MINOR", 0.0)
+        if serious_prob >= 0.15:
+            prediction = "SERIOUS"
+        elif minor_prob >= 0.35:
+            prediction = "MINOR"
+        else:
+            prediction = model.predict(features)[0]
     except (AttributeError, IndexError, TypeError, ValueError) as exc:
         LOGGER.warning("Blad predykcji: %s", exc)
         prediction = "UNKNOWN"

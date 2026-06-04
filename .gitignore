@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+data/06_models/*.pkl
+mlflow.db
+mlruns/
+logs/
+data/.DS_Store
