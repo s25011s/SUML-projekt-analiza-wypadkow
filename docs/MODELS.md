@@ -17,11 +17,11 @@ Projekt testuje wiele podejść do predykcji stopnia obrażeń w wypadkach:
 
 | Model | Accuracy | F1 ważone | F1 makro | Śledzony w MLflow |
 |-------|----------|-----------|----------|------------------|
-| **LightGBM (Optuna, 50 prób)** | 0.78 | **0.78** | **0.46** | ✅ |
-| Autogluon (best: LightGBM) | 0.83 | 0.77 | 0.40 | ✅ |
-| XGBoost | 0.83 | 0.77 | 0.40 | ✅ |
-| Random Forest (baseline) | 0.82 | 0.75 | 0.34 | ✅ |
-| Gradient Boosting | 0.82 | 0.77 | 0.40 | ✅ |
+| **LightGBM (Optuna, 50 prób)** | 0.78 | **0.78** | **0.46** | |
+| Autogluon (best: LightGBM) | 0.83 | 0.77 | 0.40 | |
+| XGBoost | 0.83 | 0.77 | 0.40 | |
+| Random Forest (baseline) | 0.82 | 0.75 | 0.34 | |
+| Gradient Boosting | 0.82 | 0.77 | 0.40 | |
 
 ### Interpretacja wyników
 
@@ -118,9 +118,9 @@ SERIOUS          0.54    0.07      0.12
 ```
 
 **Poprawa vs baseline:**
-- ✅ F1 makro: 0.33 → 0.47 (+42%)
-- ✅ Lepsze predykcje MINOR i SERIOUS
-- ⚠️ Accuracy niższe (0.82 → 0.79), ale to OK — znaczy mniej przeszacowania NO_INJURY
+- F1 makro: 0.33 → 0.47 (+42%)
+- Lepsze predykcje MINOR i SERIOUS
+- Accuracy niższe (0.82 → 0.79), ale to OK — znaczy mniej przeszacowania NO_INJURY
 
 **Wnioski:**
 - Optuna znalazła lepsze parametry niż defaults
@@ -160,9 +160,9 @@ Per-class metrics:
 - Wciąż lepsze od baseline
 
 **Porównanie z Optuna:**
-- ✅ Bardziej automatyczne
-- ❌ Mniej kontroli nad optymalizacją metryki
-- ❌ Gorzej na F1 makro
+- Bardziej automatyczne
+- Mniej kontroli nad optymalizacją metryki
+- Gorzej na F1 makro
 
 ---
 
@@ -200,9 +200,9 @@ Wybiera K = 20 najważniejszych cech.
 ...
 
 **Wpływ:**
-- ✅ Szybszy trening
-- ✅ Lepsze interpretacje
-- ❌ Mogą być stracone interakcje
+- Szybszy trening
+- Lepsze interpretacje
+- Mogą być stracone interakcje
 
 ---
 
@@ -318,18 +318,18 @@ def objective(trial):
 
 ### 2. Data leakage?
 **Sprawdzenie:**
-- ✅ Split jest random stratified
-- ✅ Encodery fitted tylko na train
-- ✅ Scaling (jeśli użyty) fitowany na train
-- ✅ Parametry szukane na train (CV 5-fold)
+- Split jest random stratified
+- Encodery fitted tylko na train
+- Scaling (jeśli użyty) fitowany na train
+- Parametry szukane na train (CV 5-fold)
 
 **Wniosek:** Bez data leakage.
 
 ### 3. Produkcyjna stabilność
 **Testowanie:**
-- ✅ Model testowany na hold-out test set
-- ✅ Encodery testowane na unseen kategoriach
-- ✅ API zwraca UNKNOWN, gdy nie umie
+- Model testowany na hold-out test set
+- Encodery testowane na unseen kategoriach
+- API zwraca UNKNOWN, gdy nie umie
 
 ---
 

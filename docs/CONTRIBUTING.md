@@ -178,11 +178,11 @@ def calculate_metrics(predictions: np.ndarray, targets: np.ndarray) -> dict:
 Zawsze używaj typów:
 
 ```python
-# ❌ Źle
+# Źle
 def process(data):
     return data.fillna(0)
 
-# ✅ Dobrze
+# Dobrze
 def process(data: pd.DataFrame) -> pd.DataFrame:
     return data.fillna(0)
 ```
@@ -501,5 +501,5 @@ Fork → Clone → Branch → Code → Test → Commit → Push → PR → Revie
 - [Sklearn docs](https://scikit-learn.org/) — Machine learning
 - [Git docs](https://git-scm.com/book/en/v2) — Git learning
 
-Powodzenia! 🚀
+Powodzenia! 
 
