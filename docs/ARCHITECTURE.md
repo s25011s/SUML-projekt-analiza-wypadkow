@@ -2,11 +2,17 @@
 
 ## Przegląd
 
-Projekt składa się z trzech niezależnych, ale zintegrowanych warstw:
+Projekt składa się z czterech niezależnych, ale zintegrowanych warstw:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    API (FastAPI)                                 │
+│               Streamlit UI (port 8501)                          │
+│            crash_kedro.ui.streamlit_app                         │
+│         [formularz wypadku → wywołanie /predict]                │
+└────────────────────────────────┬────────────────────────────────┘
+                                 │ HTTP POST /predict
+┌────────────────────────────────▼────────────────────────────────┐
+│                    API (FastAPI, port 8000)                      │
 │                  crash_kedro.api.app                             │
 │              [/predict, /health, /predictions]                  │
 └────────────────────────────────┬────────────────────────────────┘
@@ -121,8 +127,26 @@ Projekt składa się z trzech niezależnych, ale zintegrowanych warstw:
 **Funkcje:**
 - Ładowanie modelu z wielu miejsc (zmienna `MODEL_PATH`, katalog `data/06_models/`)
 - Transformacja wejścia przy użyciu enkoderów
-- Predykcja
+- Próg decyzyjny: SERIOUS ≥ 15%, MINOR ≥ 35% (zamiast domyślnych 50%)
 - Logowanie do JSONL
+
+---
+
+### 4. UI Layer (Warstwa interfejsu)
+
+**Odpowiedzialność:** graficzny interfejs dla użytkownika końcowego
+
+**Katalog:** `src/crash_kedro/ui/`
+
+**Komponenty:**
+- `streamlit_app.py` — formularz Streamlit
+- `predictor.py` — klient HTTP do komunikacji z API
+
+**Funkcje:**
+- Formularz z polami wypadku (pogoda, pojazd, warunki itp.)
+- Wywołanie `POST /predict` na backendzie
+- Wyświetlenie wyniku po polsku + prawdopodobieństw klas
+- URL backendu konfigurowalny przez `PREDICTION_API_URL`
 
 ---
 

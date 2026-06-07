@@ -17,10 +17,10 @@ Projekt testuje wiele podejść do predykcji stopnia obrażeń w wypadkach:
 
 | Model | Accuracy | F1 ważone | F1 makro | Śledzony w MLflow |
 |-------|----------|-----------|----------|------------------|
-| **LightGBM (Optuna, 50 prób)** | 0.79 | **0.78** | **0.47** | ✅ |
+| **LightGBM (Optuna, 50 prób)** | 0.78 | **0.78** | **0.46** | ✅ |
 | Autogluon (best: LightGBM) | 0.83 | 0.77 | 0.40 | ✅ |
 | XGBoost | 0.83 | 0.77 | 0.40 | ✅ |
-| Random Forest (baseline) | 0.82 | 0.75 | 0.33 | ✅ |
+| Random Forest (baseline) | 0.82 | 0.75 | 0.34 | ✅ |
 | Gradient Boosting | 0.82 | 0.77 | 0.40 | ✅ |
 
 ### Interpretacja wyników
@@ -37,7 +37,7 @@ Projekt testuje wiele podejść do predykcji stopnia obrażeń w wypadkach:
   - ~0.40-0.47 to umiarkowane
   - Pokazuje realną zdolność modelu do predykcji SERIOUS (1% danych)
 
-**Najlepszy model:** LightGBM z Optuna (F1 makro 0.47)
+**Najlepszy model:** LightGBM z Optuna (F1 makro 0.46)
 
 ---
 
@@ -83,35 +83,38 @@ Per-class metrics:
 **Przestrzeń poszukiwań:**
 ```python
 params = {
-    'num_leaves': [8, 32, 128],
-    'learning_rate': [0.01, 0.1, 0.5],
-    'n_estimators': [100, 300],
-    'lambda_l1': [0, 1, 5],
-    'lambda_l2': [0, 1, 5],
-    'max_depth': [5, 10, 20],
+    'n_estimators': [100, 500],
+    'max_depth': [3, 15],
+    'learning_rate': [0.01, 0.3],
+    'num_leaves': [20, 150],
+    'min_child_samples': [5, 100],
+    'subsample': [0.6, 1.0],
+    'colsample_bytree': [0.6, 1.0],
 }
 ```
 
-**Optymalne parametry (przykład):**
+**Optymalne parametry (próba #40, najlepsza):**
 ```
-num_leaves: 64
-learning_rate: 0.05
-n_estimators: 200
-lambda_l1: 1
-lambda_l2: 1
-max_depth: 10
+n_estimators: 435
+max_depth: 14
+learning_rate: 0.256
+num_leaves: 124
+min_child_samples: 49
+subsample: 0.899
+colsample_bytree: 0.731
 ```
 
 **Wyniki:**
 ```
-Accuracy:    0.79
+Accuracy:    0.78
 F1 (ważone): 0.78
-F1 (makro):  0.47 ← Najlepsze!
+F1 (makro):  0.46 ← Najlepsze!
 
 Per-class metrics:
-  NO_INJURY: precision=0.84, recall=0.92, f1=0.88
-  MINOR:     precision=0.51, recall=0.31, f1=0.39
-  SERIOUS:   precision=0.43, recall=0.12, f1=0.19
+              precision  recall  f1-score
+MINOR            0.37    0.39      0.38
+NO_INJURY        0.87    0.87      0.87
+SERIOUS          0.54    0.07      0.12
 ```
 
 **Poprawa vs baseline:**

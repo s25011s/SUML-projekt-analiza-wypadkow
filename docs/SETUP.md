@@ -24,11 +24,17 @@ docker-compose up --build
 ```
 
 ### Użycie
-- **Swagger (dokumentacja interaktywna):** http://localhost:8000/docs
-- **ReDoc:** http://localhost:8000/redoc
+
+Docker uruchamia dwa kontenery jednocześnie:
+
+| Kontener | Adres | Opis |
+|---|---|---|
+| `api` | http://localhost:8000 | FastAPI — endpointy predykcji |
+| `streamlit` | http://localhost:8501 | Interfejs graficzny |
+
+- **Swagger UI:** http://localhost:8000/docs
+- **Streamlit UI:** http://localhost:8501
 - **Health check:** http://localhost:8000/health
-- **POST /predict** — predykcja dla jednego rekordu
-- **GET /predictions/recent** — ostatnie predykcje z logów
 
 Parametry zmienne można ustawić w `docker-compose.yml`, np. `MODEL_PATH`.
 
@@ -226,6 +232,7 @@ uvicorn crash_kedro.api.app:app --port 8001
 | Zmienna | Opis | Domyślnie |
 |---------|------|----------|
 | `MODEL_PATH` | Ścieżka do pliku modelu | Automatyczne wyszukiwanie w `data/06_models/` |
+| `PREDICTION_API_URL` | URL backendu dla Streamlit | `http://localhost:8000` |
 | `PYTHONPATH` | Ścieżka do kodu źródłowego | `src` (w Dockerze automatyczne) |
 
 Przykład:
